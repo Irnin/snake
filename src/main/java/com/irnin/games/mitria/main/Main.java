@@ -1,4 +1,4 @@
-package com.irnin.games;
+package com.irnin.games.mitria.main;
 
 import javax.swing.*;
 

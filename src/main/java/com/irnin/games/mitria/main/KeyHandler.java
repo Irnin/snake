@@ -1,4 +1,4 @@
-package com.irnin.games;
+package com.irnin.games.mitria.main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
