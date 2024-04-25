@@ -23,6 +23,12 @@ public class Player extends Entity{
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
+        solidArea = new Rectangle();
+        solidArea.x = 16;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -31,7 +37,7 @@ public class Player extends Entity{
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
 
-        speed = 6;
+        speed = 7;
         direction = "down";
     }
 
@@ -56,23 +62,43 @@ public class Player extends Entity{
             return;
         }
 
+        // MOVE PLAYER
+
         if(keyH.upPressed) {
             direction = "up";
-            worldY -= speed;
         }
         else if(keyH.downPressed) {
             direction = "down";
-            worldY += speed;
         }
         else if(keyH.leftPressed) {
             direction = "left";
-            worldX -= speed;
         }
         else if(keyH.rightPressed) {
             direction = "right";
-            worldX += speed;
         }
 
+        // Check Tile collision
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+
+        if(!collisionOn) {
+            switch(direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+            }
+        }
+
+        // Walking animation
         spriteCounter ++;
         if(spriteCounter > 10) {
             if(spriteNum == 1) {
@@ -84,6 +110,8 @@ public class Player extends Entity{
 
             spriteCounter = 0;
         }
+
+
     }
 
     public void draw(Graphics2D g2) {
@@ -132,5 +160,8 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+        // Display colision box
+        //g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
     }
 }
