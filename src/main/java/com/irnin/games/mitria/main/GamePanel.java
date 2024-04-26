@@ -1,6 +1,7 @@
 package com.irnin.games.mitria.main;
 
 import com.irnin.games.mitria.entity.Player;
+import com.irnin.games.mitria.object.SuperObject;
 import com.irnin.games.mitria.tile.TileManager;
 
 import javax.swing.*;
@@ -27,10 +28,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH= new KeyHandler();
-    public CollisionChecker cChecker = new CollisionChecker(this);
     Thread gameThread;
-
+    public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
+    public SuperObject obj[] = new SuperObject[10];
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -43,6 +45,10 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void setupGame() {
+        aSetter.setObject();
     }
 
     @Override
@@ -85,6 +91,13 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
 
         tileM.draw(g2);
+
+        for(int i = 0; i < obj.length; i++) {
+            if(obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
+
         player.draw(g2);
         g2.dispose();
     }
