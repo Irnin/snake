@@ -1,22 +1,25 @@
 package com.irnin.games.mitria.tile;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.irnin.games.mitria.main.GamePanel;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class TileManager {
     GamePanel gp;
-    public Tile[] tile;
+    public ArrayList<Tile> tiles = new ArrayList<>();
     public int mapTileNum[][];
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[10];
+
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldCol];
 
         getTileImage();
@@ -24,27 +27,19 @@ public class TileManager {
     }
 
     public void getTileImage() {
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+
         try {
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
+            String json = new String(Files.readAllBytes(Paths.get("src/main/resources/tiles/tiles.json")));
+            Type tileListType = new TypeToken<ArrayList<Tile>>() {}.getType();
+            tiles = gson.fromJson(json, tileListType);
 
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
-            tile[1].collision = true;
+            for(Tile t: tiles) {
+                t.setBufferedImage();
+            }
 
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
-            tile[2].collision = true;
-
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
-
-            tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-            tile[4].collision = true;
-
-            tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -64,7 +59,6 @@ public class TileManager {
             while(col < gp.maxWorldCol && row < gp.maxWorldRow) {
                 String line = br.readLine();
 
-
                 while(col < gp.maxWorldCol) {
                     String numbers[] = line.split(" ");
 
@@ -81,7 +75,6 @@ public class TileManager {
             }
 
             br.close();
-
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -106,9 +99,15 @@ public class TileManager {
                 worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
                 worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-            }
 
+                    // Getting image for tile
+                    BufferedImage image = tiles.stream()
+                            .filter(t -> t.getId() != null && t.getId() - 1 == tileNum)
+                            .findFirst().get().getImage();
+
+                    // Displaying
+                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            }
 
             worldCol++;
 

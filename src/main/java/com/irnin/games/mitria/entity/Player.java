@@ -1,5 +1,6 @@
 package com.irnin.games.mitria.entity;
 
+import com.irnin.games.mitria.Directions;
 import com.irnin.games.mitria.main.GamePanel;
 import com.irnin.games.mitria.main.KeyHandler;
 
@@ -38,7 +39,7 @@ public class Player extends Entity{
         worldY = gp.tileSize * 21;
 
         speed = 7;
-        direction = "down";
+        direction = Directions.SOUTH;
     }
 
     public void getPlayerImage() {
@@ -65,16 +66,16 @@ public class Player extends Entity{
         // MOVE PLAYER
 
         if(keyH.upPressed) {
-            direction = "up";
+            direction = Directions.NORTH;
         }
         else if(keyH.downPressed) {
-            direction = "down";
+            direction = Directions.SOUTH;
         }
         else if(keyH.leftPressed) {
-            direction = "left";
+            direction = Directions.WEST;
         }
         else if(keyH.rightPressed) {
-            direction = "right";
+            direction = Directions.EAST;
         }
 
         // Check Tile collision
@@ -83,16 +84,16 @@ public class Player extends Entity{
 
         if(!collisionOn) {
             switch(direction) {
-                case "up":
+                case NORTH:
                     worldY -= speed;
                     break;
-                case "down":
+                case SOUTH:
                     worldY += speed;
                     break;
-                case "left":
+                case WEST:
                     worldX -= speed;
                     break;
-                case "right":
+                case EAST:
                     worldX += speed;
                     break;
             }
@@ -121,7 +122,7 @@ public class Player extends Entity{
         BufferedImage image = null;
 
         switch(direction) {
-            case "up":
+            case NORTH:
                 if(spriteNum == 1) {
                     image = up1;
                 }
@@ -130,7 +131,7 @@ public class Player extends Entity{
                 }
 
                 break;
-            case "down":
+            case SOUTH:
                 if(spriteNum == 1) {
                     image = down1;
                 }
@@ -139,7 +140,7 @@ public class Player extends Entity{
                 }
 
                 break;
-            case "left":
+            case WEST:
                 if(spriteNum == 1) {
                     image = left1;
                 }
@@ -148,7 +149,7 @@ public class Player extends Entity{
                 }
 
                 break;
-            case "right":
+            case EAST:
                 if(spriteNum == 1) {
                     image = right1;
                 }
