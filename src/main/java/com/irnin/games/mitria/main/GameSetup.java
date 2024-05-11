@@ -10,10 +10,10 @@ public class GameSetup {
 
     public static void loadConfiguration() {
         displayPlayer = true;
-        displayPlayerCollisionBlock = true;
+        displayPlayerCollisionBlock = false;
         displayWorldGrid = false;
         printFPS = true;
-        playMusic = false;
+        playMusic = true;
         playSE = true;
     }
 
