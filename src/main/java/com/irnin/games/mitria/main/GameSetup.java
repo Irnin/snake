@@ -8,7 +8,7 @@ public class GameSetup {
 
     public static void loadConfiguration() {
         displayPlayer = true;
-        displayPlayerCollisionBlock = false;
+        displayPlayerCollisionBlock = true;
         displayWorldGrid = false;
         printFPS = true;
     }
