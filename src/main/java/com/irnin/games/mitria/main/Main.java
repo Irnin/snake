@@ -10,6 +10,7 @@ public class Main {
         window.setResizable(false);
         window.setTitle("Mitria");
 
+        GameSetup.loadConfiguration();
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();

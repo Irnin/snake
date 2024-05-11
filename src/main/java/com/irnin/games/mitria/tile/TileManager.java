@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.irnin.games.mitria.main.GamePanel;
+import com.irnin.games.mitria.main.GameSetup;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -107,6 +109,9 @@ public class TileManager {
 
                     // Displaying
                     g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+                    if(GameSetup.isDisplayWorldGrid())
+                        g2.drawRect(screenX, screenY, 16 * 4, 16 * 4);
             }
 
             worldCol++;

@@ -1,12 +1,10 @@
 package com.irnin.games.mitria.tile;
 
 import com.google.gson.annotations.Expose;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 
 public class Tile {
 
@@ -58,6 +56,7 @@ public class Tile {
 
         try (InputStream is = getClass().getResourceAsStream(tilePath)) {
             // This file could always be available
+            assert is != null;
             image = ImageIO.read(is);
         } catch(IOException e) {
             e.printStackTrace();

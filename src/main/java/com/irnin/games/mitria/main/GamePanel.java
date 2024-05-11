@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject[] objects = new SuperObject[10];
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -75,7 +75,9 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             if(timer >= 1_000_000_000) {
-                //System.out.println("FPS: " + drawCount);
+                if(GameSetup.isPrintFPS())
+                    System.out.println("FPS: " + drawCount);
+
                 drawCount = 0;
                 timer = 0;
             }
@@ -92,10 +94,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         tileM.draw(g2);
 
-        for(int i = 0; i < obj.length; i++) {
-            if(obj[i] != null) {
-                obj[i].draw(g2, this);
-            }
+        // Displaying objects
+        for (SuperObject superObject : objects) {
+            if (superObject != null)
+                superObject.draw(g2, this);
         }
 
         player.draw(g2);
