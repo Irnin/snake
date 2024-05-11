@@ -1,8 +1,6 @@
 package com.irnin.games.mitria.main;
 
-import com.irnin.games.mitria.object.OBJ_Chest;
-import com.irnin.games.mitria.object.OBJ_Door;
-import com.irnin.games.mitria.object.OBJ_Key;
+import com.irnin.games.mitria.object.*;
 
 public class AssetSetter {
 
@@ -40,5 +38,9 @@ public class AssetSetter {
         gp.objects[6] = new OBJ_Chest();
         gp.objects[6].worldX = 10 * gp.tileSize;
         gp.objects[6].worldY = 7 * gp.tileSize;
+
+        gp.objects[7] = new OBJ_Boots();
+        gp.objects[7].worldX = 37 * gp.tileSize;
+        gp.objects[7].worldY = 42 * gp.tileSize;
     }
 }
