@@ -4,6 +4,7 @@ import com.irnin.games.mitria.Directions;
 import com.irnin.games.mitria.main.GamePanel;
 import com.irnin.games.mitria.main.GameSetup;
 import com.irnin.games.mitria.main.KeyHandler;
+import com.irnin.games.mitria.main.UtilityTools;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -49,12 +50,23 @@ public class Player extends Entity{
         try {
             up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
+            up1 = UtilityTools.scaleImage(up1);
+            up2 = UtilityTools.scaleImage(up2);
+
             down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
             down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
+            down1 = UtilityTools.scaleImage(down1);
+            down2 = UtilityTools.scaleImage(down2);
+
             left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
+            left1 = UtilityTools.scaleImage(left1);
+            left2 = UtilityTools.scaleImage(left2);
+
             right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+            right1 = UtilityTools.scaleImage(right1);
+            right2 = UtilityTools.scaleImage(right2);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -181,7 +193,7 @@ public class Player extends Entity{
         }
 
         if(GameSetup.isDisplayPlayer())
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(image, screenX, screenY, null);
 
         if(GameSetup.isDisplayPlayerCollisionBlock())
             g2.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);

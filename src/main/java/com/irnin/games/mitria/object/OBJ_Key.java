@@ -1,5 +1,7 @@
 package com.irnin.games.mitria.object;
 
+import com.irnin.games.mitria.main.UtilityTools;
+
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
@@ -10,6 +12,7 @@ public class OBJ_Key extends SuperObject{
 
         try {
             image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
+            image = UtilityTools.scaleImage(image);
         } catch(IOException e) {
             e.printStackTrace();
         }

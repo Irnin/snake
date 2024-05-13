@@ -1,6 +1,8 @@
 package com.irnin.games.mitria.tile;
 
 import com.google.gson.annotations.Expose;
+import com.irnin.games.mitria.main.UtilityTools;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -49,6 +51,8 @@ public class Tile {
             System.err.println("Error loading image: " + tilePath);
             e.printStackTrace();
         }
+
+        image = UtilityTools.scaleImage(image);
     }
 
     private void loadDefaultBufferedImage() {
@@ -62,5 +66,4 @@ public class Tile {
             e.printStackTrace();
         }
     }
-
 }

@@ -108,10 +108,10 @@ public class TileManager {
                             .findFirst().get().getImage();
 
                     // Displaying
-                    g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                    g2.drawImage(image, screenX, screenY, null);
 
                     if(GameSetup.isDisplayWorldGrid())
-                        g2.drawRect(screenX, screenY, 16 * 4, 16 * 4);
+                        g2.drawRect(screenX, screenY, GamePanel.tileSize, GamePanel.tileSize);
             }
 
             worldCol++;
