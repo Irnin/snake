@@ -1,24 +1,12 @@
 package com.irnin.games.mitria.main;
 
+import com.irnin.games.mitria.engine.Game;
+
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("Mitria");
-
-        GameSetup.loadConfiguration();
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
-        window.pack();
-
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-
-        gamePanel.setupGame();
-        gamePanel.startGameThread();
+        Game.main();
     }
 }
