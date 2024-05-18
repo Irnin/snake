@@ -15,10 +15,10 @@ public class Game {
 
 
     public Game() {
-        initialize();
+        initializeGame();
 
     }
-    private void  initialize( ) {
+    private void  initializeGame() {
 
         String toString =  new String("Game instance = " + gameInstance);
         running = true;

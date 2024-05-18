@@ -12,8 +12,8 @@ public class Player extends Entity{
     public int screenY;
 
     public Player() {
-        this.screenX = Game.getGAME_WIDTH()/2;
-        this.screenY = Game.getGAME_HEIGHT()/2;
+        this.screenX = Game.getGAME_WIDTH()/2 - 20;
+        this.screenY = Game.getGAME_HEIGHT()/2 - 20;
 
         String[] spritesPaths = {
                 "/player/boy_up_1.png",
