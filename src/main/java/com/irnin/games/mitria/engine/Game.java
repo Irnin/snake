@@ -3,16 +3,20 @@ package com.irnin.games.mitria.engine;
 import javax.swing.*;
 
 public class Game {
-    private int GAME_WIDTH = 1280, GAME_HEIGHT = 720;
+    private final int GAME_WIDTH = 1280;
+    private final int GAME_HEIGHT = 720;
     private boolean running;
     private long lastTime;
     private Model model;
     private View view;
     private Controller controller;
+    private static Game gameInstance;
 
 
 
     public Game() {
+        //gameInstance = new Game();
+        String toString =  new String("Dupa");
         running = true;
         lastTime = System.nanoTime();
         model = new Model();
@@ -26,7 +30,13 @@ public class Game {
         frame.setLocationRelativeTo(null); //app launches at screen center
         frame.setVisible(true);
         frame.addKeyListener(controller);
+
     }
+
+
+    public int getGAME_WIDTH()  { return GAME_WIDTH;  }
+    public int getGAME_HEIGHT() { return GAME_HEIGHT; }
+
 
     public void run() {
         double drawInterval = (float)1_000_000_000 / GameSetup.FPSLimit;
@@ -60,8 +70,23 @@ public class Game {
         }
     }
 
-    public static void main() {
-        Game game = new Game();
-        game.run();
+    public static Game getGameInstance() {
+        if (gameInstance == null) {
+            gameInstance = new Game();
+
+        }
+        return gameInstance;
     }
+
+
+
+    public static void main() {
+
+        gameInstance = getGameInstance();
+
+
+        gameInstance.run();
+    }
+
+
 }

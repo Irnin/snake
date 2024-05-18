@@ -3,8 +3,11 @@ package com.irnin.games.mitria.engine;
 import com.irnin.games.mitria.Directions;
 import com.irnin.games.mitria.entity.Player;
 
+
+
 public class Model {
     public Player player;
+
 
     // INPUTS
     public boolean upPressed, downPressed, leftPressed, rightPressed, displayDebugInfo;

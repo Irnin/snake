@@ -14,6 +14,8 @@ public class Controller implements KeyListener {
     }
 
     public void handleInput() {
+
+
         if (model.upPressed) {
             model.movePlayer(0, -1, Directions.NORTH);
         }
