@@ -9,6 +9,7 @@ public class Controller implements KeyListener {
     private Model model;
 
     public Controller(Model model) {
+
         this.model = model;
     }
 

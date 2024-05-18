@@ -3,11 +3,14 @@ package com.irnin.games.mitria.engine;
 import javax.swing.*;
 
 public class Game {
+    private int GAME_WIDTH = 1280, GAME_HEIGHT = 720;
     private boolean running;
     private long lastTime;
     private Model model;
     private View view;
     private Controller controller;
+
+
 
     public Game() {
         running = true;
@@ -19,7 +22,8 @@ public class Game {
         JFrame frame = new JFrame("Mitria");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(view);
-        frame.setSize(800, 600);
+        frame.setSize(GAME_WIDTH, GAME_HEIGHT); //frame dimensions as initialized constants
+        frame.setLocationRelativeTo(null); //app launches at screen center
         frame.setVisible(true);
         frame.addKeyListener(controller);
     }
