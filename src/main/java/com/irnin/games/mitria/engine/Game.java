@@ -1,7 +1,6 @@
 package com.irnin.games.mitria.engine;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Game {
     // VARIABLES
@@ -97,7 +96,7 @@ public class Game {
     }
 
     public static void main() {
-        gameInstance = getGameInstance();
-        gameInstance.run();
+        Game game = new Game();
+        game.run();
     }
 }
