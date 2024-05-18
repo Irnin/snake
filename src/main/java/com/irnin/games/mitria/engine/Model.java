@@ -29,8 +29,18 @@ public class Model {
 
     public void movePlayer(int dx, int dy, Directions direction) {
         player.walkAnimation();
-        this.player.screenX += (dx * 3);
-        this.player.screenY += (dy * 3);
+
+        // Threshold - player movement bounds
+        if( ((player.screenX + (dx * 3)) >= 0) && ((player.screenX + (dx * 3)) <= Game.getGAME_WIDTH()) )
+        {
+            this.player.screenX += (dx * 3);
+        }
+
+        if( (player.screenY + (dy * 3)) >= 0 && ((player.screenY + (dy * 3)) <= Game.getGAME_HEIGHT()) )
+        {
+            this.player.screenY += (dy * 3);
+        }
+
         player.setDirection(direction);
         updateXY();
     }
