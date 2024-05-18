@@ -15,8 +15,8 @@ public class Game {
 
 
     public Game() {
-        //gameInstance = new Game();
-        String toString =  new String("Dupa");
+
+        String toString =  new String("Game instance = " + gameInstance);
         running = true;
         lastTime = System.nanoTime();
         model = new Model();
