@@ -34,6 +34,7 @@ public class Game {
     }
 
     private void initializeGameFrame() {
+        
         //define player position panel
         JPanel playerPositionPanel = new JPanel();
         playerPositionPanel.add(new JLabel("X = " + model.player.screenX + "   "  )); // X position
