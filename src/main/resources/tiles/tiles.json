@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "grass",
+    "collision": false
+  },
+  {
+    "id": 2,
+    "name": "wall",
+    "collision": true
+  },
+  {
+    "id": 3,
+    "name": "water",
+    "collision": true
+  },
+  {
+    "id": 4,
+    "name": "earth",
+    "collision": false
+  },
+  {
+    "id": 5,
+    "name": "tree",
+    "collision": true
+  },
+  {
+    "id": 6,
+    "name": "sand",
+    "collision": false
+  }
+]

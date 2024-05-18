@@ -1,17 +1,27 @@
 package com.irnin.games.mitria.entity;
 
 import com.irnin.games.mitria.Directions;
-
-import javax.imageio.ImageIO;
+import com.irnin.games.mitria.engine.GameSetup;
 
 public class Player extends Entity{
-    public int screenX;
-    public int screenY;
+    // FIXED position on map
+    public final int screenX;
+    public final int screenY;
+
 
     public Player() {
-        this.screenX = 20;
-        this.screenY = 20;
+        // STARTUP TILE ON MAP
+        worldX = GameSetup.tileSize * 23;
+        worldY = GameSetup.tileSize * 21;
 
+        // FIXED POSITION ON SCREEN
+        screenX = GameSetup.screenWidth / 2 - (GameSetup.tileSize / 2);
+        screenY = GameSetup.screenHeight / 2 - (GameSetup.tileSize / 2);
+
+        // SETUP VARIABLES
+        walkingSpeed = 7;
+
+        // LOADING GRAPHICS
         String[] spritesPaths = {
                 "/player/boy_up_1.png",
                 "/player/boy_up_2.png",
@@ -23,5 +33,14 @@ public class Player extends Entity{
                 "/player/boy_right_2.png"};
 
         addGraphics(spritesPaths);
+    }
+
+    public void movePlayer(int dx, int dy, Directions direction) {
+        walkAnimation();
+
+        this.worldX += (dx * walkingSpeed);
+        this.worldY += (dy * walkingSpeed);
+
+        setDirection(direction);
     }
 }

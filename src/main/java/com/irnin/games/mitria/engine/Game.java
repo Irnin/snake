@@ -19,7 +19,7 @@ public class Game {
         JFrame frame = new JFrame("Mitria");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(view);
-        frame.setSize(800, 600);
+        frame.setSize(GameSetup.screenWidth, GameSetup.screenHeight);
         frame.setVisible(true);
         frame.addKeyListener(controller);
     }
