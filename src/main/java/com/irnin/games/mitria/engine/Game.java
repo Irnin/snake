@@ -1,10 +1,9 @@
 package com.irnin.games.mitria.engine;
 
-import com.irnin.games.mitria.entity.Player;
+import com.irnin.games.mitria.entity.Map;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.jar.JarEntry;
 
 public class Game {
     private static final int GAME_WIDTH = 1280;
@@ -15,6 +14,7 @@ public class Game {
     private View view;
     private Controller controller;
     private static Game gameInstance;
+    private static Map map;
     protected static JLabel xLabel,yLabel;
 
 
@@ -29,6 +29,8 @@ public class Game {
         model = new Model();
         view = new View(model);
         controller = new Controller(model);
+        map = Map.getMapInstance();
+        map.drawMap();
         initializeGameFrame();
     }
 
