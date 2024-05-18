@@ -32,7 +32,13 @@ public class Model {
         this.player.screenX += (dx * 3);
         this.player.screenY += (dy * 3);
         player.setDirection(direction);
-
+        updateXY();
+    }
+    public void updateXY() {
+        Game.xLabel.setText("X = " + player.screenX);
+        Game.yLabel.setText("Y = " + player.screenY);
+        Game.xLabel.repaint();
+        Game.yLabel.repaint();
     }
 }
 

@@ -15,12 +15,11 @@ public class Game {
     private View view;
     private Controller controller;
     private static Game gameInstance;
-
+    public static JLabel xLabel,yLabel;
 
 
     public Game() {
         initializeGame();
-
     }
     private void  initializeGame() {
 
@@ -34,11 +33,17 @@ public class Game {
     }
 
     private void initializeGameFrame() {
-        
+
         //define player position panel
         JPanel playerPositionPanel = new JPanel();
-        playerPositionPanel.add(new JLabel("X = " + model.player.screenX + "   "  )); // X position
-        playerPositionPanel.add(new JLabel("Y = " + model.player.screenY          )); // Y position
+        xLabel = new JLabel("X = "); // X position
+        yLabel = new JLabel("Y = "); // Y position
+        xLabel.repaint();
+        yLabel.repaint();
+
+        playerPositionPanel.add(xLabel);
+        playerPositionPanel.add(yLabel);
+        playerPositionPanel.repaint();
 
         //define game Master panel
         JPanel gameMasterPanel  = new JPanel();
@@ -56,6 +61,10 @@ public class Game {
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(controller);
         gameFrame.setVisible(true);
+    }
+
+    public void setplayerXposition(int x) {
+        this.lastTime = lastTime;
     }
 
     public void run() {
@@ -92,7 +101,6 @@ public class Game {
 
     public static int getGAME_WIDTH()  { return GAME_WIDTH;  }
     public static int getGAME_HEIGHT() { return GAME_HEIGHT; }
-
     public static Game getGameInstance() {
         if (gameInstance == null) {
             gameInstance = new Game();

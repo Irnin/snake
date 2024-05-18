@@ -27,4 +27,13 @@ public class Player extends Entity{
 
         addGraphics(spritesPaths);
     }
+
+    public int getplayerXposition() {
+            this.screenX = screenX;
+        return screenX;
+    }
+    public int getplayerYposition() {
+        this.screenY = screenY;
+        return screenY;
+    }
 }
