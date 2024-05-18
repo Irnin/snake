@@ -7,17 +7,13 @@ import javax.imageio.ImageIO;
 
 public class Player extends Entity{
 
-    private static Game game = Game.getGameInstance();
-    static int gameWidth = game.getGAME_WIDTH();
-    static int gameHeight = game.getGAME_HEIGHT();
-
 
     public int screenX;
     public int screenY;
 
     public Player() {
-        this.screenX = gameWidth/2;
-        this.screenY = gameHeight/2;
+        this.screenX = Game.getGAME_WIDTH()/2;
+        this.screenY = Game.getGAME_HEIGHT()/2;
 
         String[] spritesPaths = {
                 "/player/boy_up_1.png",

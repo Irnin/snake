@@ -3,8 +3,8 @@ package com.irnin.games.mitria.engine;
 import javax.swing.*;
 
 public class Game {
-    private final int GAME_WIDTH = 1280;
-    private final int GAME_HEIGHT = 720;
+    private static final int GAME_WIDTH = 1280;
+    private static final int GAME_HEIGHT = 720;
     private boolean running;
     private long lastTime;
     private Model model;
@@ -15,11 +15,15 @@ public class Game {
 
 
     public Game() {
+        initialize();
+
+    }
+    private void  initialize( ) {
 
         String toString =  new String("Game instance = " + gameInstance);
         running = true;
         lastTime = System.nanoTime();
-        model = new Model();
+        model = new Model( );
         view = new View(model);
         controller = new Controller(model);
 
@@ -30,12 +34,11 @@ public class Game {
         frame.setLocationRelativeTo(null); //app launches at screen center
         frame.setVisible(true);
         frame.addKeyListener(controller);
+    };
 
-    }
 
-
-    public int getGAME_WIDTH()  { return GAME_WIDTH;  }
-    public int getGAME_HEIGHT() { return GAME_HEIGHT; }
+    public static int getGAME_WIDTH()  { return GAME_WIDTH;  }
+    public static int getGAME_HEIGHT() { return GAME_HEIGHT; }
 
 
     public void run() {
