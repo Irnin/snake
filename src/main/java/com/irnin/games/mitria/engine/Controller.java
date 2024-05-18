@@ -31,7 +31,6 @@ public class Controller implements KeyListener {
     }
 
     // INPUT
-
     @Override
     public void keyTyped(KeyEvent e) {
 
