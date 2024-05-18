@@ -56,16 +56,13 @@ public class Game {
         JFrame gameFrame = new JFrame("Mitria");
         gameFrame.setLayout(new BorderLayout());
         gameFrame.add(gameMasterPanel, BorderLayout.CENTER);
-        gameFrame.setSize(GAME_WIDTH, GAME_HEIGHT); //gameFrame dimensions as initialized constants
+        gameFrame.setSize(GAME_WIDTH+65, GAME_HEIGHT+120); //gameFrame dimensions as initialized constants
         gameFrame.setLocationRelativeTo(null); //app launches at screen center
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(controller);
         gameFrame.setVisible(true);
     }
 
-    public void setplayerXposition(int x) {
-        this.lastTime = lastTime;
-    }
 
     public void run() {
         double drawInterval = (float)1_000_000_000 / GameSetup.FPSLimit;
@@ -107,7 +104,6 @@ public class Game {
         }
         return gameInstance;
     }
-
     public static void main() {
         gameInstance = getGameInstance();
         gameInstance.run();
