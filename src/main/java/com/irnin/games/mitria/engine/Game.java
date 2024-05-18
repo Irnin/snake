@@ -1,6 +1,10 @@
 package com.irnin.games.mitria.engine;
 
+import com.irnin.games.mitria.entity.Player;
+
 import javax.swing.*;
+import java.awt.*;
+import java.util.jar.JarEntry;
 
 public class Game {
     private static final int GAME_WIDTH = 1280;
@@ -20,26 +24,38 @@ public class Game {
     }
     private void  initializeGame() {
 
-        String toString =  new String("Game instance = " + gameInstance);
+        String toString = new String("Game instance = " + gameInstance);
         running = true;
         lastTime = System.nanoTime();
-        model = new Model( );
+        model = new Model();
         view = new View(model);
         controller = new Controller(model);
+        initializeGameFrame();
+    }
 
-        JFrame frame = new JFrame("Mitria");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(view);
-        frame.setSize(GAME_WIDTH, GAME_HEIGHT); //frame dimensions as initialized constants
-        frame.setLocationRelativeTo(null); //app launches at screen center
-        frame.setVisible(true);
-        frame.addKeyListener(controller);
-    };
+    private void initializeGameFrame() {
+        //define player position panel
+        JPanel playerPositionPanel = new JPanel();
+        playerPositionPanel.add(new JLabel("X = " + model.player.screenX + "   "  )); // X position
+        playerPositionPanel.add(new JLabel("Y = " + model.player.screenY          )); // Y position
 
+        //define game Master panel
+        JPanel gameMasterPanel  = new JPanel();
+        gameMasterPanel.setLayout(new BorderLayout());
+        gameMasterPanel.add(view, BorderLayout.CENTER);
+        gameMasterPanel.add(playerPositionPanel, BorderLayout.NORTH);
+        gameMasterPanel.setBackground(Color.BLACK);
 
-    public static int getGAME_WIDTH()  { return GAME_WIDTH;  }
-    public static int getGAME_HEIGHT() { return GAME_HEIGHT; }
-
+        //define game Frame
+        JFrame gameFrame = new JFrame("Mitria");
+        gameFrame.setLayout(new BorderLayout());
+        gameFrame.add(gameMasterPanel, BorderLayout.CENTER);
+        gameFrame.setSize(GAME_WIDTH, GAME_HEIGHT); //gameFrame dimensions as initialized constants
+        gameFrame.setLocationRelativeTo(null); //app launches at screen center
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.addKeyListener(controller);
+        gameFrame.setVisible(true);
+    }
 
     public void run() {
         double drawInterval = (float)1_000_000_000 / GameSetup.FPSLimit;
@@ -73,21 +89,18 @@ public class Game {
         }
     }
 
+    public static int getGAME_WIDTH()  { return GAME_WIDTH;  }
+    public static int getGAME_HEIGHT() { return GAME_HEIGHT; }
+
     public static Game getGameInstance() {
         if (gameInstance == null) {
             gameInstance = new Game();
-
         }
         return gameInstance;
     }
 
-
-
     public static void main() {
-
         gameInstance = getGameInstance();
-
-
         gameInstance.run();
     }
 
