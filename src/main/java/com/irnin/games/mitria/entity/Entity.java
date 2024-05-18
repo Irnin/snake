@@ -17,7 +17,7 @@ public class Entity {
     // Position on map
     public int worldX, worldY;
 
-    int walkingSpeed;
+    protected int walkingSpeed;
 
     public Entity() {
 

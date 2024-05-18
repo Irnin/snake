@@ -9,6 +9,5 @@ public class GameSetup {
     public static final int maxScreenRow = 12;
     public static final int screenWidth = maxScreenCol * tileSize;
     public static final int screenHeight = maxScreenRow * tileSize;
-
     public static final int FPSLimit = 60;
 }
