@@ -44,7 +44,7 @@ public class Model {
         player.setDirection(direction);
         updateXY();
     }
-    public void updateXY() {
+    protected void updateXY() {
         Game.xLabel.setText("X = " + player.screenX);
         Game.yLabel.setText("Y = " + player.screenY);
         Game.xLabel.repaint();

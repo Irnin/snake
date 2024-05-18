@@ -15,7 +15,7 @@ public class Game {
     private View view;
     private Controller controller;
     private static Game gameInstance;
-    public static JLabel xLabel,yLabel;
+    protected static JLabel xLabel,yLabel;
 
 
     public Game() {
@@ -56,7 +56,8 @@ public class Game {
         JFrame gameFrame = new JFrame("Mitria");
         gameFrame.setLayout(new BorderLayout());
         gameFrame.add(gameMasterPanel, BorderLayout.CENTER);
-        gameFrame.setSize(GAME_WIDTH+65, GAME_HEIGHT+120); //gameFrame dimensions as initialized constants
+        //gameFrame dimensions as initialized constants + margin
+        gameFrame.setSize(GAME_WIDTH+65, GAME_HEIGHT+120);
         gameFrame.setLocationRelativeTo(null); //app launches at screen center
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(controller);
