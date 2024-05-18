@@ -1,14 +1,19 @@
 package com.irnin.games.mitria.engine;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Game {
+    // VARIABLES
     private boolean running;
     private long lastTime;
-    private Model model;
-    private View view;
-    private Controller controller;
+    private final Model model;
+    private final View view;
+    private final Controller controller;
+    public static JLabel debugInfo;
+    private static Game gameInstance;
 
+    // INITIALIZATION
     public Game() {
         running = true;
         lastTime = System.nanoTime();
@@ -16,16 +21,44 @@ public class Game {
         view = new View(model);
         controller = new Controller(model);
 
-        JFrame frame = new JFrame("Mitria");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(view);
-        frame.setSize(GameSetup.screenWidth, GameSetup.screenHeight);
-        frame.setVisible(true);
-        frame.addKeyListener(controller);
+        // TODO mapa michała
+        //map = Map.getMapInstance();
+        //map.drawMap();
+
+        initializeGameFrame();
+    }
+
+    // TODO display debug info console on F2
+    private void initializeGameFrame() {
+        //define player position panel
+        JPanel debugInfoConsole = new JPanel();
+        debugInfo = new JLabel("");
+        debugInfo.repaint();
+
+        debugInfoConsole.add(debugInfo);
+        debugInfoConsole.repaint();
+
+        //define game Master panel
+        JPanel gameMasterPanel  = new JPanel();
+        gameMasterPanel.setLayout(new BorderLayout());
+        gameMasterPanel.add(view, BorderLayout.CENTER);
+        gameMasterPanel.add(debugInfoConsole, BorderLayout.NORTH);
+        gameMasterPanel.setBackground(Color.BLACK);
+
+        //define game Frame
+        JFrame gameFrame = new JFrame("Mitria");
+        gameFrame.setLayout(new BorderLayout());
+        gameFrame.add(gameMasterPanel, BorderLayout.CENTER);
+        //gameFrame dimensions as initialized constants + margin
+        gameFrame.setSize(Config.screenWidth, Config.screenHeight);
+        gameFrame.setLocationRelativeTo(null); //app launches at screen center
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.addKeyListener(controller);
+        gameFrame.setVisible(true);
     }
 
     public void run() {
-        double drawInterval = (float)1_000_000_000 / GameSetup.FPSLimit;
+        double drawInterval = (float)1_000_000_000 / Config.FPSLimit;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -56,8 +89,15 @@ public class Game {
         }
     }
 
+    public static Game getGameInstance() {
+        if (gameInstance == null) {
+            gameInstance = new Game();
+        }
+        return gameInstance;
+    }
+
     public static void main() {
-        Game game = new Game();
-        game.run();
+        gameInstance = getGameInstance();
+        gameInstance.run();
     }
 }

@@ -1,22 +1,17 @@
 package com.irnin.games.mitria.entity;
 
 import com.irnin.games.mitria.Directions;
-import com.irnin.games.mitria.engine.GameSetup;
+import com.irnin.games.mitria.engine.Config;
 
 public class Player extends Entity{
     // FIXED position on map
     public final int screenX;
     public final int screenY;
 
-
     public Player() {
-        // STARTUP TILE ON MAP
-        worldX = GameSetup.tileSize * 23;
-        worldY = GameSetup.tileSize * 21;
-
         // FIXED POSITION ON SCREEN
-        screenX = GameSetup.screenWidth / 2 - (GameSetup.tileSize / 2);
-        screenY = GameSetup.screenHeight / 2 - (GameSetup.tileSize / 2);
+        screenX = Config.screenWidth / 2 - (Config.tileSize / 2);
+        screenY = Config.screenHeight / 2 - (Config.tileSize / 2);
 
         // SETUP VARIABLES
         walkingSpeed = 7;
@@ -42,5 +37,10 @@ public class Player extends Entity{
         this.worldY += (dy * walkingSpeed);
 
         setDirection(direction);
+    }
+
+    public void setPosition(int x, int y) {
+        this.worldX = Config.tileSize * x;
+        this.worldY = Config.tileSize * y;
     }
 }

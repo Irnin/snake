@@ -16,10 +16,6 @@ public class View extends JPanel {
         this.model = model;
     }
 
-    public void displayDebugInfo() {
-
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -34,7 +30,7 @@ public class View extends JPanel {
             g.setFont(arial_40);
             g.setColor(Color.YELLOW);
             g.drawString("FPS: " + model.FPS, 0, 40);
-            g.drawString( model.player.worldX + "x " + model.player.worldY + "y" , 0, 80);
+            g.drawString( model.player.getWorldX() + "x " + model.player.getWorldY() + "y" , 0, 80);
         }
     }
 
@@ -45,20 +41,21 @@ public class View extends JPanel {
         int worldRow = 0;
 
         // Loop through all tiles
-        while (worldCol < model.map.columns && worldRow < model.map.rows) {
+        while (worldCol < model.map.getColumns() && worldRow < model.map.getRows()) {
 
-            Tiles tile = model.map.tiles[worldCol][worldRow];
+            Tiles tile = model.map.tileGrid[worldCol][worldRow];
 
-            int worldX = worldCol * GameSetup.tileSize;
-            int worldY = worldRow * GameSetup.tileSize;
-            int screenX = worldX - model.player.worldX + model.player.screenX;
-            int screenY = worldY - model.player.worldY + model.player.screenY;
+            int worldX = worldCol * Config.tileSize;
+            int worldY = worldRow * Config.tileSize;
+            int screenX = worldX - model.player.getWorldX() + model.player.screenX;
+            int screenY = worldY - model.player.getWorldY() + model.player.screenY;
 
             // Display only tiles that are visible
-            if(worldX + GameSetup.tileSize > model.player.worldX - model.player.screenX &&
-                    worldX - GameSetup.tileSize < model.player.worldX + model.player.screenX &&
-                    worldY + GameSetup.tileSize > model.player.worldY - model.player.screenY &&
-                    worldY - GameSetup.tileSize < model.player.worldY + model.player.screenY) {
+
+            if(     worldX + Config.tileSize > model.player.getWorldX() - model.player.screenX &&
+                    worldX - Config.tileSize < model.player.getWorldX() + model.player.screenX &&
+                    worldY + Config.tileSize > model.player.getWorldY() - model.player.screenY &&
+                    worldY - Config.tileSize < model.player.getWorldY() + model.player.screenY) {
 
                 // Getting image for tile
                 BufferedImage image = model.tiles.get(tile).getTexture();
@@ -70,7 +67,7 @@ public class View extends JPanel {
             // Increment the loop
             worldCol++;
 
-            if(worldCol == model.map.rows) {
+            if(worldCol == model.map.getRows()) {
                 worldCol = 0;
                 worldRow++;
             }

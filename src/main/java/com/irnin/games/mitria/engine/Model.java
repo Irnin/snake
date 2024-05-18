@@ -21,7 +21,7 @@ public class Model {
     public int FPS = 0;
 
     // TILES
-    public HashMap<Tiles, Tile> tiles = new HashMap<Tiles, Tile>();
+    public final HashMap<Tiles, Tile> tiles = new HashMap<Tiles, Tile>();
     public Map map;
 
     public Model() {
@@ -43,22 +43,35 @@ public class Model {
         tiles.put(Tiles.WALL, new Tile(6, "wall", "/tiles/wall.png"));
 
         // Loading map 01
-        try {
-            Gson gson = new Gson();
-            InputStream is = getClass().getResourceAsStream("/maps/map01.json");
-            InputStreamReader reader = new InputStreamReader(is);
-            map = gson.fromJson(reader, Map.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        loadMap("/maps/map01.json");
+
+        // Generate map DOESN'T WORK
+//        map = new Map(30, 20);
+//        map.generateMap();
     }
 
     public void update(double deltaTime) {
 
     }
 
+    // METHODS
     public void movePlayer(int dx, int dy, Directions direction) {
         player.movePlayer(dx, dy, direction);
+        Tools.updateDebugInfo("X = " + player.getWorldX() + " Y = " + player.getWorldY());
     }
+
+    private void loadMap(String path) {
+        try {
+            Gson gson = new Gson();
+            InputStream is = getClass().getResourceAsStream(path);
+            InputStreamReader reader = new InputStreamReader(is);
+            map = gson.fromJson(reader, Map.class);
+
+            player.setPosition(map.getStartupX(), map.getStartupY());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 

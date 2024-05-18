@@ -6,7 +6,8 @@ import com.irnin.games.mitria.engine.Tools;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-public class Entity {
+// abstract class for player, npc, mobs
+public abstract class Entity {
     // GRAPHICS OF ENTITY
     private final HashMap<EntitySprites, BufferedImage> graphics = new HashMap<EntitySprites, BufferedImage>();
 
@@ -15,7 +16,7 @@ public class Entity {
     int walkingAnimationCounter = 1;
 
     // Position on map
-    public int worldX, worldY;
+    protected int worldX, worldY;
 
     protected int walkingSpeed;
 
@@ -47,6 +48,7 @@ public class Entity {
         graphics.put(entitySprites, image);
     }
 
+    // GETTERS
     public BufferedImage getSprite() {
         BufferedImage sprite = null;
         switch (direction) {
@@ -79,6 +81,24 @@ public class Entity {
         return sprite;
     }
 
+    public int getWorldX() {
+        return worldX;
+    }
+
+    public int getWorldY() {
+        return worldY;
+    }
+
+    // SETTERS
+    public void setWorldX(int worldX) {
+        this.worldX = worldX;
+    }
+
+    public void setWorldY(int worldY) {
+        this.worldY = worldY;
+    }
+
+    // ANIMATIONS
     public void walkAnimation() {
         animationCounter ++;
         if(animationCounter > 10) {

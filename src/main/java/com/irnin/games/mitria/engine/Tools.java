@@ -17,7 +17,7 @@ public class Tools {
     }
 
     public static BufferedImage scaleImage(BufferedImage original) {
-        int scale = GameSetup.tileSize;
+        int scale = Config.tileSize;
 
         BufferedImage scaledImage = new BufferedImage(scale, scale, original.getType());
         Graphics2D g2 = scaledImage.createGraphics();
@@ -25,5 +25,9 @@ public class Tools {
         g2.dispose();
 
         return scaledImage;
+    }
+
+    public static void updateDebugInfo(String debugInfo) {
+        Game.debugInfo.setText(debugInfo);
     }
 }
